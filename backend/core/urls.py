@@ -10,6 +10,11 @@ router.register(
     views.adhaar_requests.AdhaarRequestViewset,
     basename="adhaar",
 )
+router.register(
+    r"challenges",
+    views.sign_challenge.SignChallengeViewset,
+    basename="challenge",
+)
 
 urlpatterns = [
     path("", views.frontend_app),
