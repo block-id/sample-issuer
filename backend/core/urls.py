@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 
 from core import views
@@ -17,9 +17,9 @@ router.register(
 )
 
 urlpatterns = [
-    path("", views.frontend_app),
     path("api/", include(
         (router.urls, "api-adhaar"),
         namespace="api"
-    ))
+    )),
+    re_path(".*", views.frontend_app),
 ]
