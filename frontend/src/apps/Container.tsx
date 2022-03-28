@@ -11,6 +11,8 @@ const Container: React.FC = () => (
       justifyContent: 'center',
       height: '100%',
       marginTop: 10,
+      maxWidth: '80%',
+      marginX: 'auto',
     }}
   >
     <Outlet />

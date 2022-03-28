@@ -4,9 +4,9 @@ import BaseService from 'common/services/BaseService';
 import objectToFormData from 'common/utils/objectToFormData';
 
 export default class AdhaarService extends BaseService {
-  async apply(data: AdhaarFormData): Promise<AxiosResponse<any, any>> {
+  async apply(data: AdhaarFormData): Promise<AxiosResponse<AdhaarRequest, any>> {
     return Axios.post(
-      '/api/adhaar',
+      '/api/adhaar/',
       objectToFormData(data),
       this.buildAxiosConfig(),
     );
