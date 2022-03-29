@@ -1,0 +1,96 @@
+{
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idType": { "type": "string" },
+        "idName": { "type": "string" },
+        "issuer": { "$ref": "#/$defs/issuer" },
+        "groups": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/attributeGroup" }
+        }
+      },
+      "required": ["idType", "idName", "issuer", "groups"]
+    },
+    "signature": {"type": "string"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "issuer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "publicKey": { "type": "string" },
+        "logo": { "type": "string" }
+      },
+      "required": ["name", "publicKey", "logo"]
+    },
+    "groupIssuer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "publicKey": { "type": "string" }
+      },
+      "required": ["publicKey"]
+    },
+    "attributeGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "groupName": { "type": "string" },
+            "idType": {"type": "string"},
+            "attributes": {
+              "type": "object",
+              "additionalProperties": false,
+              "patternProperties": {
+                "^.*$": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "pattern": "^(string|image)$"
+                    },
+                    "value": { "type": "string" }
+                  },
+                  "required": ["type", "value"]
+                }
+              }
+            },
+            "subject": {
+              "type": "object",
+              "properties": {
+                "publicKey": { "type": "string" }
+              },
+              "required": ["publicKey"],
+              "additionalProperties": false
+            },
+            "issuer": { "$ref": "#/$defs/groupIssuer" },
+            "issuedAt": { "type": "string" },
+            "expiresAt": { "type": "string" }
+          },
+          "required": [
+            "groupName",
+            "attributes",
+            "subject",
+            "issuer",
+            "issuedAt",
+            "expiresAt",
+            "idType"
+          ]
+        },
+        "signature": { "type": "string" }
+      },
+      "required": ["data", "signature"]
+    }
+  }
+}

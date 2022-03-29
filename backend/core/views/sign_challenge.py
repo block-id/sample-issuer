@@ -1,8 +1,10 @@
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError
 
 from core.models.sign_challenge import SignChallenge
 from core.serializers.sign_challenge.detail import SignChallengeSerializer
+from core.utils import verify_and_save_sign_challenge
 
 
 class SignChallengeViewset(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
@@ -15,4 +17,16 @@ class SignChallengeViewset(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         url_path="solve",
     )
     def solve(self, request, pk):
-        print("here", self.get_object())
+        # Verify solution
+        challenge: SignChallenge = self.get_object()
+        signature: str = request.data.get("signature", "")
+        public_key: str = request.data.get("public_key", "")
+
+        try:
+            verify_and_save_sign_challenge(challenge, signature, public_key)
+        except (AssertionError, ValueError) as e:
+            raise ValidationError(str(e))
+
+        # Issue new id
+        if getattr(challenge, "adhaarrequest") is None:
+            pass
