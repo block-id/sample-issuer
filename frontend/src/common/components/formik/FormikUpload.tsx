@@ -2,9 +2,9 @@ import React, { useRef, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 
 const FomrikUpload: React.FC<
-  React.HTMLProps<HTMLInputElement> & {
-    fileRef: React.MutableRefObject<File | null>;
-  }
+React.HTMLProps<HTMLInputElement> & {
+  fileRef: React.MutableRefObject<File | null>;
+}
 > = ({ fileRef, ...props }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string>('');

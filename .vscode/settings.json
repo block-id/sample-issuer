@@ -1,0 +1,9 @@
+{
+  "typescript.tsdk": "frontend/node_modules/typescript/lib",
+  "eslint.options": {
+    "overrideConfigFile": "frontend/.eslintrc.json"
+  },
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true,
+  "python.analysis.extraPaths": ["backend"]
+}

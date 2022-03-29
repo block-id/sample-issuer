@@ -1,11 +1,14 @@
 import React, { useRef } from 'react';
-import { Form, Formik, FormikProps, FormikValues } from 'formik';
+import {
+  Form, Formik, FormikProps, FormikValues,
+} from 'formik';
+import { Box, Button } from '@mui/material';
 
 import AdhaarService from 'apps/adhaar/services/AdhaarService';
 import ErrorMessage from 'common/components/formik/ErrorMessage';
 import FormikTextField from 'common/components/formik/FormikTextField';
 import FormikUpload from 'common/components/formik/FormikUpload';
-import { Box, Button } from '@mui/material';
+import redirectToWalletSigning from 'common/utils/redirectToWalletSigning';
 
 const adhaarService = new AdhaarService();
 const ApplyForm: React.FC = () => {
@@ -27,7 +30,8 @@ const ApplyForm: React.FC = () => {
             ...values,
             photograph: photoRef.current as File,
           });
-          // Redirect to wallet for sign challenge
+          const { content, id } = response.data.sign_challenge;
+          redirectToWalletSigning(content, id);
         } catch (e: any) {
           alert(`Could not make adhaar request: ${e.message}`);
         }
