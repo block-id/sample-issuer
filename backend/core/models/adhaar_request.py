@@ -10,7 +10,7 @@ class AdhaarRequest(models.Model):
     dob = models.DateField()
     address = models.TextField()
     photograph = models.ImageField()
-    sign_challenge = models.OneToOneField(SignChallenge, on_delete=models.PROTECT)
+    sign_challenge: SignChallenge = models.OneToOneField(SignChallenge, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:

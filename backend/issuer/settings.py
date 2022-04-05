@@ -123,7 +123,7 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
-MEDIA_URL = "media/"
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
@@ -141,3 +141,4 @@ ISSUER_CONTRACT_ABI = BASE_DIR / "resources/abi/IssuersContract.json"
 
 ADHAAR_PRIVATE_KEY = "1903a3639d3b25dfe99cfe1dccf4bc6370a9a3ec669f8af5104da8a3136d021c"
 ADHAAR_ID_TYPE = "9d069a3c410c4441a92b5d4e5e1ea9ca"
+ADHAAR_LOGO = BASE_DIR / "resources/images/uidai_logo.svg"
