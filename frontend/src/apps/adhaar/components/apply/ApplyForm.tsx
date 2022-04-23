@@ -91,6 +91,7 @@ const ApplyForm: React.FC = () => {
             name="photograph"
             placeholder="Photograph"
             fileRef={photoRef}
+            accept="image/*"
           />
           <ErrorMessage name="photograph" />
           <Box
