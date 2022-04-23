@@ -44,7 +44,7 @@ def verify_and_save_sign_challenge(
 
 def get_image_base64(file: typing.BinaryIO, file_type: str = "svg+xml") -> str:
     file_type = imghdr.what(file) or file_type
-    encoded = b64encode(file.read())
+    encoded = b64encode(file.read()).decode("utf-8")
     return f"data:image/{file_type};base64,{encoded}"
 
 
