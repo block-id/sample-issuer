@@ -15,6 +15,11 @@ router.register(
     views.sign_challenge.SignChallengeViewset,
     basename="challenge",
 )
+router.register(
+    r"verifier-requests",
+    views.verifier_request.VerifierRequestViewset,
+    basename="verifier-request",
+)
 
 urlpatterns = [
     path("api/", include(
