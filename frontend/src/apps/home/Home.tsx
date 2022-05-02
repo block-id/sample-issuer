@@ -30,7 +30,12 @@ const Home: React.FC = () => (
       >
         Driving License
       </Button>
-      <Button variant="outlined" color="info">
+      <Button
+        variant="outlined"
+        color="info"
+        component={RouterLink}
+        to="/verifiers/adhaar-request"
+      >
         Sample Verifier
       </Button>
     </Box>
