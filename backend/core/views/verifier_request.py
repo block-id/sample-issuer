@@ -5,9 +5,11 @@ from django.urls import reverse
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError
 
 
 from lib.utils import get_full_url
+from core.utils import verify_and_save_request
 from core.models.verifier_request import VerifierRequest
 from core.serializers.verifier_request.create import VerifierRequestSerializer
 
@@ -45,7 +47,7 @@ class VerifierRequestViewset(
                     kwargs={
                         "pk": instance.id,
                     },
-                )
+                ),
             ),
         }
         return JsonResponse(wallet_payload, status=status.HTTP_200_OK)
@@ -56,4 +58,19 @@ class VerifierRequestViewset(
         url_path="upload",
     )
     def upload(self, request, pk):
-        print("here", request.data)
+        verifier_request: VerifierRequest = self.get_object()
+        verifiable_presentation = request.data
+
+        try:
+            verify_and_save_request(
+                verifier_request,
+                verifiable_presentation,
+                request.GET.get("public_key"),
+            )
+        except AssertionError as e:
+            raise ValidationError("Could not verify verifiable presentation: " + str(e))
+
+        return JsonResponse({
+            "token": verifier_request.token,
+            "redirectUrl": ""
+        })
