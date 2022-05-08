@@ -1,13 +1,15 @@
+import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Box, Button, Checkbox, FormControlLabel, Typography,
 } from '@mui/material';
-import React, { useRef } from 'react';
 
 import VerifierService from 'apps/verifier/services/VerifierService';
 
 const verifierService = new VerifierService();
 // Hard coded request form for Adhaar
 const Request: React.FC = () => {
+  const [requestId, setRequestId] = useState<number | undefined>();
   const selectedGroups = useRef<string[]>([]);
   const GROUPS = [
     ['name_dob', 'Name & DOB'],
@@ -24,10 +26,26 @@ const Request: React.FC = () => {
         attribute_groups: [...selectedGroups.current],
       });
       console.log(response.data);
+      setRequestId(response.data.id);
     } catch (e: any) {
       alert(`Could not make verifier request: ${e.message}`);
     }
   };
+
+  if (requestId !== undefined) {
+    return (
+      <>
+        <Typography variant="h5">
+          Verifier request issued. Share the following link with the customer:
+        </Typography><br />
+        <Typography variant="h5" align="center">
+          <Link to={requestId.toString()}>
+            {`${window.location.href}/${requestId}/`}
+          </Link>
+        </Typography>
+      </>
+    );
+  }
 
   return (
     <>

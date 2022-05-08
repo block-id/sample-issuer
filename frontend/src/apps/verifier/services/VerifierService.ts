@@ -12,4 +12,11 @@ export default class VerifierService extends BaseService {
       this.buildAxiosConfig(),
     );
   }
+
+  async getRequest(id: number): Promise<AxiosResponse<VerifierRequestWalletPayload, any>> {
+    return Axios.get(
+      `/api/verifier-requests/${id}/`,
+      this.buildAxiosConfig(),
+    );
+  }
 }
