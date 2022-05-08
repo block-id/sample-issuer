@@ -7,6 +7,7 @@ class VerifierRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = VerifierRequest
         fields = [
+            "id",
             "id_type",
             "attribute_groups",
             "entropy",
