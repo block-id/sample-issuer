@@ -1,0 +1,3 @@
+interface VpWrapperContext {
+  vp: VerifiablePresentation;
+}

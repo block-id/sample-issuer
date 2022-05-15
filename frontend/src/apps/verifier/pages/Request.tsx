@@ -24,6 +24,7 @@ const Request: React.FC = () => {
       const response = await verifierService.createRequest({
         id_type: ADHAAR_ID_TYPE,
         attribute_groups: [...selectedGroups.current],
+        redirectUrl: '/verifiers/adhaar-request/success/',
       });
       console.log(response.data);
       setRequestId(response.data.id);

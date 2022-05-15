@@ -1,29 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Box, Button, Typography } from '@mui/material';
 
 import VerifierService from 'apps/verifier/services/VerifierService';
-import { getQueryParam } from 'common/utils/queryParams';
-import { Box, Button, Typography } from '@mui/material';
 import { ADHAAR_ID_TYPE } from 'common/utils/constatns';
 import { getWalletCreateVpUrl } from 'common/utils/walletUrls';
+import VpRedirectWrapper, { useVp } from 'apps/verifier/components/VpRedirectWrapper';
 
 const verifierService = new VerifierService();
 const Home: React.FC = () => {
-  const token = getQueryParam('loginToken');
-  const requestId = getQueryParam('id');
-  const [vp, setVp] = useState<VerifiablePresentation | undefined>();
-
-  useEffect(() => {
-    if (token?.trim().length === 0 || requestId === null) return;
-
-    verifierService.getRequestVp(
-      parseInt(requestId as string), token as string,
-    ).then((response) => {
-      setVp(response.data.verifiable_presentation);
-    }).catch((err) => {
-      console.error(err);
-      alert('Could not fetch verifiable presentation');
-    });
-  }, [token, requestId]);
+  const { vp } = useVp();
 
   const handleLogin = async () => {
     let verifierRequestId: number | undefined;
@@ -33,6 +18,7 @@ const Home: React.FC = () => {
       verifierRequestId = (await verifierService.createRequest({
         id_type: ADHAAR_ID_TYPE,
         attribute_groups: ['name_dob', 'photo_blood_type'],
+        redirectUrl: '',
       })).data.id;
     } catch (e: any) {
       alert(`Could not make verifier request: ${e.message}`);
@@ -75,4 +61,6 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+const HomeWrapper: React.FC = () => <VpRedirectWrapper><Home /></VpRedirectWrapper>;
+
+export default HomeWrapper;
