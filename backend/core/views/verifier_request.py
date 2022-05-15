@@ -5,7 +5,7 @@ from django.urls import reverse
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError, AuthenticationFailed
 
 
 from lib.utils import get_full_url
@@ -73,4 +73,20 @@ class VerifierRequestViewset(
         return JsonResponse({
             "token": verifier_request.token,
             "redirectUrl": ""
+        })
+
+    @action(
+        methods=["get"],
+        detail=True,
+        url_path="vp",
+    )
+    def get_request_vp(self, request, pk):
+        verifier_request: VerifierRequest = self.get_object()
+        token: str = request.GET.get("token", "")
+
+        if token.strip() != verifier_request.token:
+            raise AuthenticationFailed("Invalid token")
+
+        return JsonResponse({
+            "verifiable_presentation": verifier_request.verifiable_presentation
         })
