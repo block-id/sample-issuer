@@ -1,3 +1,3 @@
 interface VpWrapperContext {
-  vp: VerifiablePresentation;
+  vp?: VerifiablePresentation;
 }

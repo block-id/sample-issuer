@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 
 import VpRedirectWrapper, { useVp } from 'apps/verifier/components/VpRedirectWrapper';
+import IdCard from '../components/id-card/IdCard';
 
 const Success: React.FC = () => {
   const { vp } = useVp();
@@ -13,6 +14,7 @@ const Success: React.FC = () => {
     }}
     >
       <Typography variant="h5">Your credentials have been successfuly verified!</Typography>
+      {vp && <IdCard verifiable_id={vp.data.id} />}
     </Box>
   );
 };

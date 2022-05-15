@@ -24,7 +24,7 @@ export default class VerifierService extends BaseService {
   async getRequestVp(id: number, token: string):
   Promise<AxiosResponse<{verifiable_presentation: VerifiablePresentation}, any>> {
     return Axios.get(
-      `/api/verifier-requests/${id}/?token=${token}`,
+      `/api/verifier-requests/${id}/vp/?token=${token}`,
       this.buildAxiosConfig(),
     );
   }

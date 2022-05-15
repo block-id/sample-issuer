@@ -15,19 +15,7 @@ interface VerifierRequestWalletPayload {
 
 interface VerifiablePresentation {
   data: {
-    id: {
-      data: {
-        idType: string;
-        idName: string;
-        issuer: {
-          name: string;
-          publicKey: string;
-          logo: string;
-        },
-        groups: AttributeGroup[],
-      };
-      signature: string;
-    };
+    id: VerifiableId['data'];
     entropy: string;
   };
   signature: string;

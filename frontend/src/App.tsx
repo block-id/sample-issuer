@@ -10,6 +10,7 @@ import Solve from 'apps/sign-challenge/pages/Solve';
 import Request from 'apps/verifier/pages/Request';
 import ViewRequest from 'apps/verifier/pages/ViewRequest';
 import SSOHome from 'apps/sso/pages/Home';
+import Success from 'apps/verifier/pages/Success';
 
 const App: React.FC = () => (
   <BrowserRouter>
@@ -23,6 +24,7 @@ const App: React.FC = () => (
           <Route path=":id" element={<ViewRequest />} />
         </Route>
         <Route path="/verifiers/sso-example/" element={<SSOHome />} />
+        <Route path="/verifiers/adhaar-request/success/" element={<Success />} />
       </Route>
     </Routes>
   </BrowserRouter>
