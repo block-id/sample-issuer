@@ -11,4 +11,5 @@ class VerifierRequestSerializer(serializers.ModelSerializer):
             "id_type",
             "attribute_groups",
             "entropy",
+            "redirectUrl",
         ]

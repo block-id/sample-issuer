@@ -70,10 +70,14 @@ class VerifierRequestViewset(
         except AssertionError as e:
             raise ValidationError("Could not verify verifiable presentation: " + str(e))
 
-        return JsonResponse({
-            "token": verifier_request.token,
-            "redirectUrl": ""
-        })
+        return JsonResponse(
+            {
+                "token": verifier_request.token,
+                # Note: This can easily break. I know it won't in my demo. ;)
+                "redirectUrl": verifier_request.redirectUrl
+                + f"?token={verifier_request.token}&id={verifier_request.id}",
+            }
+        )
 
     @action(
         methods=["get"],
@@ -87,6 +91,6 @@ class VerifierRequestViewset(
         if token.strip() != verifier_request.token:
             raise AuthenticationFailed("Invalid token")
 
-        return JsonResponse({
-            "verifiable_presentation": verifier_request.verifiable_presentation
-        })
+        return JsonResponse(
+            {"verifiable_presentation": verifier_request.verifiable_presentation}
+        )

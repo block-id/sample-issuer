@@ -8,3 +8,5 @@ class VerifierRequest(models.Model):
     verifiable_presentation = models.JSONField(null=True)
     # The token is sent back to the user upon successful ID verification
     token = models.TextField(blank=True)
+    # Ask the wallet to redirect to this URL as <url>?token=...&id=...
+    redirectUrl = models.URLField()
