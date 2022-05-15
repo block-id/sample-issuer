@@ -26,17 +26,17 @@ const Home: React.FC = () => (
         variant="outlined"
         color="info"
         component={RouterLink}
-        to="/issuers/driving-license"
+        to="/verifiers/adhaar-request"
       >
-        Driving License
+        Sample Verifier
       </Button>
       <Button
         variant="outlined"
         color="info"
         component={RouterLink}
-        to="/verifiers/adhaar-request"
+        to="/verifiers/sso-example"
       >
-        Sample Verifier
+        Single Sign On
       </Button>
     </Box>
   </>

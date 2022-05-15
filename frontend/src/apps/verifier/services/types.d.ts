@@ -12,3 +12,23 @@ interface VerifierRequestWalletPayload {
   sendTo: string;
   entropy: string;
 }
+
+interface VerifiablePresentation {
+  data: {
+    id: {
+      data: {
+        idType: string;
+        idName: string;
+        issuer: {
+          name: string;
+          publicKey: string;
+          logo: string;
+        },
+        groups: AttributeGroup[],
+      };
+      signature: string;
+    };
+    entropy: string;
+  };
+  signature: string;
+}

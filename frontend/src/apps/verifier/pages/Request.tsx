@@ -5,6 +5,7 @@ import {
 } from '@mui/material';
 
 import VerifierService from 'apps/verifier/services/VerifierService';
+import { ADHAAR_ID_TYPE } from 'common/utils/constatns';
 
 const verifierService = new VerifierService();
 // Hard coded request form for Adhaar
@@ -13,11 +14,10 @@ const Request: React.FC = () => {
   const selectedGroups = useRef<string[]>([]);
   const GROUPS = [
     ['name_dob', 'Name & DOB'],
-    ['photograph_blood_type', 'Photograph & Blood type'],
+    ['photo_blood_type', 'Photograph & Blood type'],
     ['address', 'Address'],
     ['unique_id', 'Unique ID'],
   ];
-  const ADHAAR_ID_TYPE = '9d069a3c410c4441a92b5d4e5e1ea9ca';
 
   const handleCreate = async () => {
     try {
