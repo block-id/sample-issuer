@@ -74,7 +74,10 @@ def sign_json(account: Account, data: typing.Any) -> str:
 
 def create_adhaar_from_request(request: AdhaarRequest) -> str:
     w3 = get_web3_http_provider(settings.WEB3_HTTP_PROVIDER)
-    account: Account = w3.eth.account.from_key(settings.ADHAAR_PRIVATE_KEY)
+    if not request.is_fake:
+        account: Account = w3.eth.account.from_key(settings.ADHAAR_PRIVATE_KEY)
+    else:
+        account: Account = w3.eth.account.from_key(settings.FAKE_ADHAAR_PRIVATE_KEY)
     id = {
         "data": {
             "idType": settings.ADHAAR_ID_TYPE,

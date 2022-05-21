@@ -8,10 +8,14 @@ const Home: React.FC = () => (
     <Box
       sx={{
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 2,
+        marginTop: 4,
         gap: 2,
+        '& .MuiButton-root': {
+          width: '100%',
+        },
       }}
     >
       <Button
@@ -20,7 +24,15 @@ const Home: React.FC = () => (
         component={RouterLink}
         to="/issuers/adhaar"
       >
-        Adhaar
+        Adhaar Issuer
+      </Button>
+      <Button
+        variant="outlined"
+        color="info"
+        component={RouterLink}
+        to="/issuers/adhaar-fake"
+      >
+        Fake Adhaar Issuer
       </Button>
       <Button
         variant="outlined"

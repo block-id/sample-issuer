@@ -143,5 +143,6 @@ ISSUER_CONTRACT_ABI = BASE_DIR / "resources/abi/IssuersContract.json"
 # Issuer config
 
 ADHAAR_PRIVATE_KEY = "1903a3639d3b25dfe99cfe1dccf4bc6370a9a3ec669f8af5104da8a3136d021c"
+FAKE_ADHAAR_PRIVATE_KEY = "7f6783ac870e40ef52104d7cdd05a3805bc27016c4fef8837d167f0433d7acc8"
 ADHAAR_ID_TYPE = "9d069a3c410c4441a92b5d4e5e1ea9ca"
 ADHAAR_LOGO = BASE_DIR / "resources/images/uidai_logo.svg"

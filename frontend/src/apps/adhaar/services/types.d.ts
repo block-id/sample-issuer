@@ -5,6 +5,7 @@ interface AdhaarFormData {
   dob: string;
   address: string;
   photograph: File;
+  is_fake: boolean;
 }
 
 interface SignChallenge {

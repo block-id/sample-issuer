@@ -17,7 +17,8 @@ const App: React.FC = () => (
     <Routes>
       <Route path="" element={<Container />}>
         <Route index element={<Home />} />
-        <Route path="/issuers/adhaar" element={<AdhaarApply />} />
+        <Route path="/issuers/adhaar" element={<AdhaarApply isFake={false} />} />
+        <Route path="/issuers/adhaar-fake" element={<AdhaarApply isFake />} />
         <Route path="/sign-challenge/:id/" element={<Solve />} />
         <Route path="/verifiers/adhaar-request" element={<Outlet />}>
           <Route index element={<Request />} />

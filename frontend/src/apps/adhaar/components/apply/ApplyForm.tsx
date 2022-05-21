@@ -11,7 +11,7 @@ import FormikUpload from 'common/components/formik/FormikUpload';
 import redirectToWalletSigning from 'common/utils/redirectToWalletSigning';
 
 const adhaarService = new AdhaarService();
-const ApplyForm: React.FC = () => {
+const ApplyForm: React.FC<{isFake: boolean}> = ({ isFake }) => {
   const photoRef = useRef<File | null>(null);
 
   return (
@@ -29,6 +29,7 @@ const ApplyForm: React.FC = () => {
           const response = await adhaarService.apply({
             ...values,
             photograph: photoRef.current as File,
+            is_fake: isFake,
           });
           const { content, id } = response.data.sign_challenge;
           redirectToWalletSigning(content, id);
